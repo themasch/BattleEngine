@@ -1,9 +1,15 @@
+# BattleEngine
+Battle Engine ist die Idee ein universel einsetzbares "Kampfscript" für eine
+möglichst breite Menge an Spielen zu entwickeln. Der besondere Fokus liegt hierbei
+natürlich bei Browsergames.
 
+## Der Kampf
 Jeder Kampf besteht aus n ∈ ℕ Armeen.
 Er läuft in mehreren Runden ab.
 Jede Armee besteht aus m ∈ ℕ Einheiten.
 
 ## Einheiten
+
 Eine Einheit ist durch folgende Eigenschaften definiert:
 
 * Einheitentyp
@@ -14,6 +20,7 @@ Eine Einheit ist durch folgende Eigenschaften definiert:
 * Befehle
 
 ## Waffensystem
+
 Jedes Waffensystem ist durch folgende Eigenschaften definiert:
 
 * Waffengattung
@@ -48,11 +55,12 @@ Aktionsrunden später.
 Die Rüstung kann nicht über den vordefinierten Wert hinaus steigen.
 
 ## Effekt
-
+TBD
 ## Befehle
-
+TBD
 
 ## Schadenberechnung
+
 Des weiteren wird der Schaden durch einen Rüstungsfaktor _(0 < rf < 1)_ bestimmt
 der von dem Rüstungstyp und der Waffengattung abhängt.
 
@@ -64,6 +72,7 @@ Neue Rüstungspunkte: _r[n+1] := r[n]-s_
 
 
 ## Durchschlagsschaden
+
 Der Durchschlagsfaktor bestimmt wie viel Schaden der Treffer bei jedem weiteren
 Zeil verursacht. Nach jedem Treffer wird hierbei die Trefferwahrscheinlichkeit
 wie folgt neu berechnet:
@@ -87,6 +96,7 @@ Beispiele:
 * erhöhter s gegen bestimmte Rüstungstypen
 
 ## Aktionsrunden
+
 Jeder Kampf wird in mehreren Runden ausgetragen.
 Jede Runde ist aufgeteilt in _c ∈ ℕ_ Aktionsrunden.
 _c := kgv(∀f U ∀rrf)_
@@ -94,7 +104,15 @@ Dieser Wert wird am Anfang jeder Runde neu ermittelt.
 Wärend einer Runde können keine neuen Einheiten in den Kampf eintreten.
 
 In der ersten Aktionsrunde in einem Kampf schießt jeder.
+In der zweiten Aktionsrunde werde zusätzlich alle Rüstungsregenerationen
+berechnet.
+
 Nach seinem Schuss wird die Angriffsverzögerung berechnet.
 _ad := c / f_
-In jeder Aktionsrunde wird dieser Wert um 1 gesenkt.
-Wird ad <= 0, so darf diese Einheit wieder Angreifen.
+
+Nach einer Regeneration wird die Regenerationsverzögerung berechnet.
+_rd := c / rrf_
+
+In jeder Aktionsrunde werden diese Werte um 1 gesenkt.
+Wird ad <= 0 so darf diese Einheit wieder Angreifen.
+Wird rd <= 0 so regeneriert diese Einheit Rüstung.
